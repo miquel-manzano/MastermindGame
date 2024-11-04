@@ -12,16 +12,31 @@ namespace PR1ManzanoEscuderoMiquel
 
         public static void Main ()
         {
+            const int CombNums = 1234;
             int[] userNums = new int[UserNumsLength]; // Array on emmagatzem els numeros del usuari
 
-            for (int i = 0; i < userNums.Length; i++)
+            ArrayMaker(userNums, 0);
+            ArrayMaker(userNums, 1);
+        }
+
+        public static void ArrayMaker(int[] Array, int mode)
+        {
+            for (int i = 0; i < Array.Length; i++)
             {
-                int userNum = InsertUserNums(i);
-                userNums[i] = userNum;
+                int returnNum = 0;
+                switch (mode)
+                {
+                    case 0:
+                        InsertUserNums(Array, i);
+                        break;
+                    case 1:
+                        ReadArray(Array, i);
+                        break;
+                }
             }
         }
 
-        public static int InsertUserNums (int i)
+        public static void InsertUserNums(int[] Array, int posicion)
         {
             const string MsgEnunciat = "Introdueix el numero de la posicio:";
             const string MsgTryAgain = "Torna a probar...";
@@ -29,7 +44,7 @@ namespace PR1ManzanoEscuderoMiquel
             bool success;
             do
             {
-                Console.WriteLine($"{MsgEnunciat} {1 + i}");
+                Console.WriteLine($"{MsgEnunciat} {1 + posicion}");
                 success = int.TryParse(Console.ReadLine(), out userNum);
                 if (success && userNum >= MinValor && userNum <= MaxValor)
                 {
@@ -42,9 +57,13 @@ namespace PR1ManzanoEscuderoMiquel
                     success = false;
                 }
             } while (!success);
-            return userNum;
+            Array[posicion] = userNum;
         }
 
-
+        public static void ReadArray(int[] Array, int posicion)
+        {
+            Console.WriteLine("Lectura d'array:");
+            Console.Write(Array[posicion]);
+        }
     }
 }
