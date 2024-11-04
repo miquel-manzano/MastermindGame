@@ -12,3 +12,4 @@ C:\Users\theza\Documents\Programacio\MastermindGame\PR1ManzanoEscuderoMiquel\PR1
 C:\Users\theza\Documents\Programacio\MastermindGame\PR1ManzanoEscuderoMiquel\PR1ManzanoEscuderoMiquel\obj\Debug\net8.0\PR1ManzanoEscuderoMiquel.pdb
 C:\Users\theza\Documents\Programacio\MastermindGame\PR1ManzanoEscuderoMiquel\PR1ManzanoEscuderoMiquel\obj\Debug\net8.0\PR1ManzanoEscuderoMiquel.genruntimeconfig.cache
 C:\Users\theza\Documents\Programacio\MastermindGame\PR1ManzanoEscuderoMiquel\PR1ManzanoEscuderoMiquel\obj\Debug\net8.0\ref\PR1ManzanoEscuderoMiquel.dll
+C:\Users\theza\Documents\Programacio\MastermindGame\PR1ManzanoEscuderoMiquel\PR1ManzanoEscuderoMiquel\obj\Debug\net8.0\PR1ManzanoEscuderoMiquel.sourcelink.json
