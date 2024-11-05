@@ -11,7 +11,9 @@ namespace PR1ManzanoEscuderoMiquel
         const int MaxValor = 6; // Valor maxim que el usuari pot insertar.
         const int ArrayLength = 4; // Longitud maxima de la combinacio.
         const string CombNums = "4444"; // Combinacio secreta.. shhhhh!
-        
+
+
+        // ASCII SYMBOLS:
 
         const string Correct = "\u004F";
         const string Incorrect = "\u00D7";
@@ -22,6 +24,8 @@ namespace PR1ManzanoEscuderoMiquel
         {
             Menu();
         }
+
+
 
         public static void Menu()
         {
@@ -69,20 +73,39 @@ namespace PR1ManzanoEscuderoMiquel
         {
             int[] userNums = new int[ArrayLength]; // Array on emmagatzem els numeros del usuari.
             int[] combNumsArray = new int[ArrayLength]; // Array on emmagatzem la combinacio secreta.
+            string[] symbolsArray = new string[ArrayLength]; // Array dels simbols ASCII.
             CombNumsArray(combNumsArray);
+
+            do
+            {
+                UserNumsArray(userNums);
+                GameMechanic(userNums, combNumsArray, symbolsArray);
+                ArrayMaker(null, null, symbolsArray, 5, null);
+            } while (attempts > 0);
+
+        }
+
+        public static void WinLoseMenu(bool result)
+        {
 
         }
 
         public static void UserNumsArray(int[] userNums) // Insercio i impres de l'array del jugador.
         {
-            ArrayMaker(userNums, null, 0, null);
+            ArrayMaker(userNums, null, null, 0, null);
             Console.WriteLine("Numeros escollits:");
-            //ArrayMaker(userNums, null, 1, null);
+            ArrayMaker(userNums, null, null, 1, null);
+        }
+
+        public static bool GameMechanic(int[] userNums, int[] combNumsArray, string[] symbolsArray)
+        {
+            ArrayMaker(userNums, combNumsArray, symbolsArray, 4, null);
+            return false;
         }
 
         public static void CombNumsArray(int[] combNumsArray) // Insercio de la combinacio secreta a una array.
         {
-            ArrayMaker(combNumsArray, null, 3, CombNums);
+            ArrayMaker(combNumsArray, null, null, 2, CombNums);
         }
 
         
@@ -94,7 +117,7 @@ namespace PR1ManzanoEscuderoMiquel
 
         // ARRAY THINGS DOWN HERE:
 
-        public static void ArrayMaker(int[] array, int[] array2, int mode, string varString) // Funció on recorres la array i pots escollir que fer mentre la recorres.
+        public static void ArrayMaker(int[] array, int[] array2, string[] symbolsArray, int mode, string varString) // Funció on recorres la array i pots escollir que fer mentre la recorres.
         {
             for (int i = 0; i < array.Length; i++)
             {
@@ -107,14 +130,17 @@ namespace PR1ManzanoEscuderoMiquel
                     case 1: // En aquest mode, mostrem els nombres d'una array per pantalla.
                         ReadArray(array, i);
                         break;
-                    case 2: // En aquest mode, comparem dos Arrays.
-                        ArrayComparator(array, array2, i);
-                        break;
-                    case 3: // En aquest mode, pasem un string a Array.
+                    case 2: // En aquest mode, pasem un string a Array.
                         StringToArray(array, i, varString);
                         break;
-                    case 4:
-                        NumsValorComparator(array, array2, i); // En aquest mode, mirem si un numero es dins de un altra array.
+                    case 3: // En aquest mode, comparem dos Arrays.
+                        ArrayComparator(array, array2, symbolsArray, i);
+                        break;
+                    case 4: // En aquest mode, mirem si un numero es dins de un altra array.
+                        NumsValorComparator(array, array2, symbolsArray, i);
+                        break;
+                    case 5:
+                        ReadStringArray(symbolsArray, i);
                         break;
                 }
             }
@@ -149,31 +175,44 @@ namespace PR1ManzanoEscuderoMiquel
             Console.Write(array[posicion]);
         }
 
-        public static void ArrayComparator(int[] array, int[] array2, int posicion)
+        public static void StringToArray(int[] array, int posicion, string varString)
+        {
+            array[posicion] = varString[posicion] - '0';
+        }
+
+        public static void ReadStringArray(string[] array, int posicion)
+        {
+            Console.Write(array[posicion]);
+        }
+
+
+
+
+
+
+        public static void ArrayComparator(int[] array, int[] array2, string[] symbolsArray, int posicion)
         {
             if (array[posicion] == array2[posicion])
             {
-                Console.WriteLine($"El numero en posicio: {posicion}, es igual a la combinacio");
+                symbolsArray[posicion] = Correct;
+                //Console.WriteLine($"El numero en posicio: {posicion}, es igual a la combinacio");
             }
             else {
-                Console.WriteLine($"El numero en posicio: {posicion}, NO es igual a la combinacio");
+                symbolsArray[posicion] = Incorrect;
+                //Console.WriteLine($"El numero en posicio: {posicion}, NO es igual a la combinacio");
             }
         }
 
-        public static void NumsValorComparator(int[] array, int[] array2, int posicion)
+        public static void NumsValorComparator(int[] array, int[] array2, string[] symbolsArray, int posicion)
         {
             for (int i = 0; i < array2.Length; i++)
             {
                 if (array[posicion] == array2[i])
                 {
-                    Console.WriteLine($"NUMERO IGUAL {array[posicion]} {array2[i]}");
+                    symbolsArray[posicion] = Almost;
+                    //Console.WriteLine($"NUMERO IGUAL {array[posicion]} {array2[i]}");
                 }
             }
-        }
-
-        public static void StringToArray(int[] array, int posicion, string varString)
-        {
-            array[posicion] = varString[posicion] - '0';
         }
     }
 }
